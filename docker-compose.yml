@@ -1,0 +1,22 @@
+services:
+  image-service:
+    build: ./image-service
+    environment:
+      DB_URL: mongodb://node:node@imagedb:27017?authSource=admin
+      DB_NAME: image
+      JWT_ISSUER: authservice
+    depends_on:
+      - image-service-db
+  image-service-db:
+    image: mongo
+    hostname: imagedb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: node
+      MONGO_INITDB_ROOT_PASSWORD: node
+      MONGO_INITDB_DATABASE: image
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      retries: 5
+      interval: 15s
+      start_period: 30s
+
