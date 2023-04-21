@@ -27,4 +27,27 @@ services:
     build: ./gateway-service
     ports:
       - "8080:8080"
-
+  # auth service
+  auth-service:
+    build: ./auth-service
+    environment:
+      DB_HOST: authdb
+      DB_PORT: 5432
+      DB_USER: node
+      DB_PASSWORD: password
+      DB_NAME: node
+    depends_on:
+      - auth-service-db
+  # auth service database (PostgreSQL)
+  auth-service-db:
+    image: postgres
+    hostname: authdb
+    environment:
+      POSTGRES_USER: node
+      POSTGRES_PASSWORD: node
+      POSTGRES_DB: node
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U node" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
