@@ -9,20 +9,28 @@ app.use(helmet());
 
 const { createProxyMiddleware } = require("http-proxy-middleware");
 app.use("/api/v1/image", createProxyMiddleware({
-    target: "http://image-service",
+    target: "http://image-service:8080",
     changeOrigin: true,
+    timeout: 5000,
+    retries: 3,
 }));
 app.use("/api/v1/auth", createProxyMiddleware({
-    target: "http://auth-service",
+    target: "http://auth-service:8080",
     changeOrigin: true,
+    timeout: 5000,
+    retries: 3,
 }));
 app.use("/api/v1/listing", createProxyMiddleware({
-    target: "http://listing-service",
+    target: "http://listing-service:8080",
     changeOrigin: true,
+    timeout: 5000,
+    retries: 3,
 }));
 app.use("/api/v1/profile", createProxyMiddleware({
-    target: "http://profile-service",
+    target: "http://profile-service:8080",
     changeOrigin: true,
+    timeout: 5000,
+    retries: 3,
 }));
 
 const port = 8080;

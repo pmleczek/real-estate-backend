@@ -30,6 +30,7 @@ services:
   # auth service
   auth-service:
     build: ./auth-service
+    hostname: auth-service
     environment:
       DB_HOST: authdb
       DB_PORT: 5432
