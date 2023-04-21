@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const fs = require("fs");
+import jwt from "jsonwebtoken";
+import fs from "fs";
 
 const keyPath = process.env.JWT_PUBLIC_KEY;
 const issuer = process.env.JWT_ISSUER;
@@ -24,4 +24,4 @@ const auth = async (req, res, next) => {
     next();
 }
 
-module.exports = auth;
+export default auth;
