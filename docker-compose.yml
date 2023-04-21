@@ -1,12 +1,15 @@
 services:
+  # image service
   image-service:
     build: ./image-service
+    hostname: image-service
     environment:
       DB_URL: mongodb://node:node@imagedb:27017?authSource=admin
       DB_NAME: image
       JWT_ISSUER: authservice
     depends_on:
       - image-service-db
+  # image service database (MongoDB)
   image-service-db:
     image: mongo
     hostname: imagedb
@@ -19,4 +22,9 @@ services:
       retries: 5
       interval: 15s
       start_period: 30s
+  # gateway service
+  gateway-service:
+    build: ./gateway-service
+    ports:
+      - "8080:8080"
 
