@@ -52,3 +52,25 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  # location service
+  location-service:
+    build: ./location-service
+    hostname: location-service
+    environment:
+      DB_URL: mongodb://node:node@locationdb:27017?authSource=admin
+      DB_NAME: location
+    depends_on:
+      - location-service-db
+  # location service database (MongoDB)
+  location-service-db:
+    image: mongo
+    hostname: locationdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: node
+      MONGO_INITDB_ROOT_PASSWORD: node
+      MONGO_INITDB_DATABASE: location
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      retries: 5
+      interval: 15s
+      start_period: 30s
