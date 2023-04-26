@@ -74,3 +74,10 @@ services:
       retries: 5
       interval: 15s
       start_period: 30s
+  # MongoDB database seeding
+  mongo-seed:
+    image: mongo
+    volumes:
+      - ./initdb:/initdb
+    command:
+      - /initdb/initmongo.sh
