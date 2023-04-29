@@ -2,8 +2,14 @@
 Backend for real estate application created with Node.js and Express.
 
 ## Table of Contents
+* [Features](#features)
 * [Technologies](#technologies)
 * [Setup](#setup)
+
+## Features
+* Custom API Gateway
+* JWT Authentication
+* GraphQL API (listing-service, location-service)
 
 ## Technologies
 Project is created with:
@@ -13,6 +19,7 @@ Project is created with:
 * multer: 1.4.5
 * node-postgres: 8.10.0
 * bcrypt: 5.1.0
+* Apollo Server: 4.7.0
 
 ## Setup
 The easiest way to run the project locally is to run it with Docker Compose:
