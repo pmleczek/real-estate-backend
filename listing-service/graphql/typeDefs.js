@@ -31,6 +31,8 @@ const typeDefs = `#graphql
         range: Float!
         listingType: ListingType
         type: PropertyType
+        offset: Int!
+        limit: Int!
     }
     
     type Query {
