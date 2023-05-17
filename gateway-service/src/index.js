@@ -25,12 +25,24 @@ app.use("/api/v1/listing", createProxyMiddleware({
     changeOrigin: true,
     timeout: 5000,
     retries: 3,
+    pathRewrite: {
+        "^/api/v1/listing/": "/",
+    },
 }));
 app.use("/api/v1/profile", createProxyMiddleware({
     target: "http://profile-service:8080",
     changeOrigin: true,
     timeout: 5000,
     retries: 3,
+}));
+app.use("/api/v1/location", createProxyMiddleware({
+    target: "http://location-service:8080",
+    changeOrigin: true,
+    timeout: 5000,
+    retries: 3,
+    pathRewrite: {
+        "^/api/v1/location/": "/",
+    },
 }));
 
 const port = 8080;
