@@ -7,14 +7,19 @@ const typeDefs = `#graphql
     }
 
     enum ListingType {
-        sale,
+        buy,
         rent
+    }
+
+    type Location {
+        type: String!
+        coordinates: [Float]!
     }
 
     type Listing {
         _id: String!
         address: String!
-        coordinates: [Float]!
+        location: Location!
         description: String!
         area: Float!
         lotArea: Float!
@@ -23,9 +28,10 @@ const typeDefs = `#graphql
         type: PropertyType!
         bedrooms: Int!
         bathrooms: Int!
+        price: Int!
     }
 
-    input SearchCriteria {
+    input SearchInput {
         lat: Float!
         lon: Float!
         range: Float!
@@ -36,8 +42,9 @@ const typeDefs = `#graphql
     }
     
     type Query {
-        listings(searchInput: SearchCriteria!): [Listing]
+        listings(searchInput: SearchInput!): [Listing]
         listing(_id: String!): Listing
+        listingCount(searchInput: SearchInput!): Int!
     }
 `
 
