@@ -10,6 +10,7 @@ const typeDefs = `#graphql
     
     type Query {
         locations(search: String!, limit: Int): [Location]
+        location(id: String!): Location!
 }
 `
 
